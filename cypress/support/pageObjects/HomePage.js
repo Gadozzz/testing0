@@ -52,6 +52,10 @@ class HomePage {
   verifyPageScrolledToTop() {
     cy.window().its('scrollY').should('eq', 0);
   }
+
+  navigateToSignupLoginPage() {
+    cy.get('a[href="/login"]').click();
+  }
 }
 
 export default HomePage;
