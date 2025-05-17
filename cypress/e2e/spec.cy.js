@@ -59,36 +59,23 @@ describe('Automation Exercise - Test Cases', () => {
     it('Test Case 13: Verify Product quantity in Cart', () => {
         productsPage.goToProducts();
         productsPage.viewFirstProduct();
-        cy.get('input#quantity').clear().type('4');
-        cy.get('button[type="button"]').contains('Add to cart').click();
-        cy.contains('View Cart').click();
-        cy.url().should('include', '/view_cart');
-        cy.get('.cart_quantity').should('contain.text', '4');
+        cy.setProductQuantityAndAddToCart(4);
+        cy.verifyQuantityInCart(4);
     });
 
     it('Test Case 20: Add Review on Product', () => {
         productsPage.goToProducts();
         productsPage.viewFirstProduct();
-        cy.get('input#name').type('Review User');
-        cy.get('input#email').type('reviewuser@example.com');
-        cy.get('textarea#review').type('This is a test review.');
-        cy.get('#button-review').click();
-        cy.contains('Thank you for your review.').should('be.visible');
+        cy.fillReviewForm('Review User', 'reviewuser@example.com', 'This is a test review.');
     });
 
     it('Test Case 24: Verify Scroll Up using Arrow button and Scroll Down functionality', () => {
-        cy.scrollTo('bottom');
-        cy.contains('Subscription').should('be.visible');
-        cy.get('#scrollUp').click();
-        cy.window().its('scrollY').should('eq', 0);
-        cy.get('.logo').should('be.visible');
+        cy.scrollToBottomAndVerifySubscription();
+        cy.scrollUpWithArrow();
     });
 
     it('Test Case 25: Verify Scroll Up without Arrow button and Scroll Down functionality', () => {
-        cy.scrollTo('bottom');
-        cy.contains('Subscription').should('be.visible');
-        cy.scrollTo('top');
-        cy.get('.logo').should('be.visible');
+        cy.scrollToBottomAndVerifySubscription();
+        cy.scrollToTopAndVerifyLogo();
     });
-
 });
