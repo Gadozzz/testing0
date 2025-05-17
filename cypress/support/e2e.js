@@ -21,4 +21,4 @@ import 'cypress-file-upload';
 import './step_definitions/common_steps';
 import './step_definitions/home_page_steps';
 import './step_definitions/product_interaction_steps';
-import './step_definitions/user_management_steps';
+
